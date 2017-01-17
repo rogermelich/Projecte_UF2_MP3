@@ -12,11 +12,25 @@ import java.util.Scanner;
  * @author roger
  */
 public class RogerMelich_Project {
+    
+    public static final int MAX_TREBALLADORS=2;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        // Array on guardarem la informació dels pilots
+        // Treballadors fa referenca a la classe Treballadors.java
+        Treballadors[] array=new Treballadors[MAX_TREBALLADORS];
+        Treballadors treballador1=new Treballadors();
+        treballador1.setNom_Cognoms("Hola 1");
+        treballador1.setNomina(3000.34);
+        
+        System.out.println("El Treballador "+treballador1.getNom_Cognoms()+" quants diners cobra "+treballador1.getNomina()+"€");
+        
+        //array[0]
+        
         Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
 
         int opcions_menu;   //integer que incloem el numeros per terminiar l'opció
