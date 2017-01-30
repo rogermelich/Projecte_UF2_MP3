@@ -18,10 +18,17 @@ public class Treballadors {
     private double Nomina = 0.0;    //Sou del Treballador
     private boolean practiques = false; // Ens Indica si el treballador esta en contracte de Pràctiues o no
 
-    private char tipusTreballador;   //Serveix per determinar si està en pràctiques o no
+    //private char tipusTreballador;   //Serveix per determinar si està en pràctiques o no
 
     private boolean introduit = false;  //Per indicar si s'ha introduït
 
+    /**
+     * Constructor
+     */
+    public Treballadors (){
+        
+    }
+    
     // Setters & Getters
     public String getNom_Cognoms() {
         return Nom_Cognoms;
@@ -71,13 +78,13 @@ public class Treballadors {
         this.practiques = practiques;
     }
 
-    public char getTipusTreballador() {
-        return tipusTreballador;
-    }
-
-    public void setTipusTreballador(char tipusTreballador) {
-        this.tipusTreballador = tipusTreballador;
-    }
+//    public char getTipusTreballador() {
+//        return tipusTreballador;
+//    }
+//
+//    public void setTipusTreballador(char tipusTreballador) {
+//        this.tipusTreballador = tipusTreballador;
+//    }
 
     public boolean isIntroduit() {
         return introduit;
@@ -93,6 +100,13 @@ public class Treballadors {
      */
     @Override
     public String toString() {
-        return "Treballadors{" + "Nom_Cognoms=" + Nom_Cognoms + ", DNI=" + DNI + ", Adreca=" + Adreca + ", Codi_Postal=" + Codi_Postal + ", Nomina=" + Nomina + ", practiques=" + practiques + ", tipusTreballador=" + tipusTreballador + ", introduit=" + introduit + '}';
+        return "Treballadors{" + "Nom Cognoms=" + Nom_Cognoms + 
+                "DNI=" + DNI + 
+                "Adreca=" + Adreca + 
+                "Codi Postal=" + Codi_Postal + 
+                "Nomina=" + Nomina + 
+                (practiques?"\n Treballador en Practiques" : "\nTreballador en Nomina");
+                //"Treballador en Practiques=" + practiques + '}';
+//                "Tipus Treballador=" + tipusTreballador + '}';
     }
 }
