@@ -26,7 +26,7 @@ public class RogerMelich_Project {
         Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
 
         int opcions_menu;   //integer que incloem el numeros per terminiar l'opció
-        boolean introduit = false;  //Per indicar si s'ha introduït
+        //boolean introduit = false;  //Per indicar si s'ha introduït
 
         Treballadors t = null; //S'utilitza per apuntar al treballador de les caselles de l'array
 
@@ -40,13 +40,12 @@ public class RogerMelich_Project {
         char modificar; //Modifcar Dades
         char llista;   //Veure Dades
 
-        String Nom_Cognoms = null;  //Nom i Cognoms del Treballador
-        String DNI = null;  //Dni del treballador
-        String Adreca = null;   //Adreça del treballador
-        int Codi_Postal = 0;    //Codi Postal del treballador
-        double Nomina = 0.0;    //Sou del Treballador
-        boolean practiques = false; // Ens Indica si el treballador esta en contracte de Pràctiues o no
-
+//        String Nom_Cognoms = null;  //Nom i Cognoms del Treballador
+//        String DNI = null;  //Dni del treballador
+//        String Adreca = null;   //Adreça del treballador
+//        int Codi_Postal = 0;    //Codi Postal del treballador
+//        double Nomina = 0.0;    //Sou del Treballador
+//        boolean practiques = false; // Ens Indica si el treballador esta en contracte de Pràctiues o no
         char tipusTreballador;   //Serveix per determinar si està en pràctiques o no
 
         do {    //Fem un do while
@@ -94,40 +93,40 @@ public class RogerMelich_Project {
                             //Codi_Postal = scan.nextInt();
                             t.setCodi_Postal(scan.nextInt());
 
-                            if (Codi_Postal < 0) {
+                            if (t.getCodi_Postal() < 0) {
                                 System.out.println("El Codi Postal a de tenir 5 digits");
                             }
-                        } while (Codi_Postal < 0);
+                        } while (t.getCodi_Postal() < 0);
 
                         do {
                             System.out.println("Introdueix la Nomina del Treballador");
                             //Nomina = scan.nextDouble();
                             t.setNomina(scan.nextDouble());
-                            if (Nomina < 0) {
+                            if (t.getNomina() < 0) {
                                 System.out.println("Valor Incorrecte");
                             }
-                        } while (Nomina < 0);
+                        } while (t.getNomina() < 0);
 
                         do {
                             System.out.println("Introdueix si es un contracte de pràctiques o no (S o N)");
                             tipusTreballador = scan.skip("[\r\n]*").nextLine().charAt(0);
 
                             if (tipusTreballador == 's' || tipusTreballador == 'S') {
-                                //practiques = true;
+                                t.setPractiques(true);
 
                             }
 
                             if (tipusTreballador == 'n' || tipusTreballador == 'N') {
-                                practiques = false;
+                                t.setPractiques(false);
                             }
                         } while (tipusTreballador != 's' && tipusTreballador != 'S' && tipusTreballador != 'n' && tipusTreballador != 'N');
-                        introduit = true; //Al introduïr tots els camps canviem introduit a true
+                        t.setIntroduit(true); //Al introduïr tots els camps canviem introduit a true
                     } else {
                         System.out.println("Ja has introduït aquest treballador o no caben més treballadors");
                         System.out.println("Que vols fer ara?");
                     }
                 case 2: //esborrar
-                    esborrar='N';
+                    esborrar = 'N';
                     for (i = 0; i < array.length; i++) {
                         t = array[i];
 
@@ -176,12 +175,14 @@ public class RogerMelich_Project {
                         }
                     }
                 case 3: //Modificar
-                    if (!introduit) {
+                    for (i = 0; i < array.length; i++);
+                    t = array[i];
+                    if (!t.isIntroduit()) {
                         System.out.println("No hi ha cap treballador per modificar, si el vols modificar el tens que introduïr promer.\n");
                         System.out.println("");
                     }
 
-                    if (introduit) {
+                    if (t.isIntroduit()) {
 
                         do {
 
@@ -192,17 +193,17 @@ public class RogerMelich_Project {
 
                         if (llista == 's' || llista == 'S') {
                             System.out.println("Dades del Treballador: ");
-                            System.out.println("Noms i Cognoms: " + Nom_Cognoms);
-                            System.out.println("DNI: " + DNI);
-                            System.out.println("Adreça: " + Adreca);
-                            System.out.println("Codi Postal: " + Codi_Postal);
-                            System.out.println("Sou del Treballador:" + Nomina);
+                            System.out.println("Noms i Cognoms: " + t.getNom_Cognoms());
+                            System.out.println("DNI: " + t.getDNI());
+                            System.out.println("Adreça: " + t.getAdreca());
+                            System.out.println("Codi Postal: " + t.getCodi_Postal());
+                            System.out.println("Sou del Treballador:" + t.getNomina());
 
-                            if (practiques) {
+                            if (t.isPractiques()) {
                                 System.out.println("Treballador en Pràctiques: Si");
                             }
 
-                            if (!practiques) {
+                            if (!t.isPractiques()) {
                                 System.out.println("Treballador en Pràctiques: No");
                             }
                         }
@@ -216,7 +217,7 @@ public class RogerMelich_Project {
 
                         if (llista == 's' || llista == 'S') {
 
-                            System.out.println("Nom i Cognoms: " + Nom_Cognoms);    //Modifiquem Nom i Cognoms
+                            System.out.println("Nom i Cognoms: " + t.getNom_Cognoms());    //Modifiquem Nom i Cognoms
 
                             do {
                                 System.out.println("Vols modificar els Noms i Cognoms? (S o N)");
@@ -226,10 +227,10 @@ public class RogerMelich_Project {
 
                             if (modificar == 's' || modificar == 'S') {
                                 System.out.println("Introdueix el Nou Treballador:");
-                                Nom_Cognoms = scan.skip("[\r\n]*").nextLine();
+                                t.setNom_Cognoms(scan.skip("[\r\n]*").nextLine());
                             }
 
-                            System.out.println("DNI: " + DNI);    //Modifiquem el DNI
+                            System.out.println("DNI: " + t.getDNI());    //Modifiquem el DNI
 
                             do {
                                 System.out.println("Vols modificar el DNI? (S o N)");
@@ -239,10 +240,10 @@ public class RogerMelich_Project {
 
                             if (modificar == 's' || modificar == 'S') {
                                 System.out.println("Introdueix el *Nou* DNI del treballador:");
-                                DNI = scan.skip("[\r\n]*").nextLine();
+                                t.setDNI(scan.skip("[\r\n]*").nextLine());
                             }
 
-                            System.out.println("Adreça: " + Adreca);    //Modifiquem l'Adreça
+                            System.out.println("Adreça: " + t.getAdreca());    //Modifiquem l'Adreça
 
                             do {
                                 System.out.println("Vols modificar l'Adreça? (S o N)");
@@ -252,10 +253,10 @@ public class RogerMelich_Project {
 
                             if (modificar == 's' || modificar == 'S') {
                                 System.out.println("Introdueix la *Nova* adreça del treballador:");
-                                Nom_Cognoms = scan.skip("[\r\n]*").nextLine();
+                                t.setAdreca(scan.skip("[\r\n]*").nextLine());
                             }
 
-                            System.out.println("Codi Postal: " + Codi_Postal);  //Modifiquem el Codi Postal
+                            System.out.println("Codi Postal: " + t.getCodi_Postal());  //Modifiquem el Codi Postal
 
                             do {
                                 System.out.println("Vols modificar el Codi Postal? (S o N)");
@@ -265,16 +266,16 @@ public class RogerMelich_Project {
                             if (modificar == 's' || modificar == 'S') {
                                 do {
                                     System.out.println("Introdueix el *Nou* valor del Codi Postal: ");
-                                    Codi_Postal = scan.nextInt();
+                                    t.setCodi_Postal(scan.nextInt());
 
-                                    if (Codi_Postal <= 0) {
+                                    if (t.getCodi_Postal() <= 0) {
                                         System.out.println("Valor incorrecte");
                                     }
 
-                                } while (Codi_Postal <= 0);
+                                } while (t.getCodi_Postal() <= 0);
                             }
 
-                            System.out.println("Sou (Nomina) del treballador: " + Nomina); //Modifiquem el Sou de Treballador
+                            System.out.println("Sou (Nomina) del treballador: " + t.getNomina()); //Modifiquem el Sou de Treballador
 
                             do {
                                 System.out.println("Vols modificar el Sou del treballador? (S o N)");
@@ -285,21 +286,21 @@ public class RogerMelich_Project {
 
                                 do {
                                     System.out.println("Introdueix el *Nou* sou del treballador: ");
-                                    Nomina = scan.nextDouble();
+                                    t.setNomina(scan.nextDouble());
 
-                                    if (Nomina <= 0) {
+                                    if (t.getNomina() <= 0) {
                                         System.out.println("Valor incorrecte!");
                                     }
 
-                                } while (Nomina <= 0);
+                                } while (t.getNomina() <= 0);
                             }
 
                             // El contracte es en Pràctiques o no
-                            if (practiques) {
+                            if (t.isPractiques()) {
                                 System.out.println("Treballador en Pràctiques: Si");
                             }
 
-                            if (!practiques) {
+                            if (!t.isPractiques()) {
                                 System.out.println("Treballador en Pràctiques: No");
                             }
 
@@ -315,11 +316,11 @@ public class RogerMelich_Project {
                                     tipusTreballador = scan.skip("[\r\n]*").nextLine().charAt(0);
 
                                     if (tipusTreballador == 's' || tipusTreballador == 'S') {
-                                        practiques = true;
+                                        t.setPractiques(true);
                                     }
 
                                     if (tipusTreballador == 'n' || tipusTreballador == 'N') {
-                                        practiques = false;
+                                        t.setPractiques(false);
                                     }
 
                                 } while (tipusTreballador != 's' && tipusTreballador != 'n' && tipusTreballador != 'S' && tipusTreballador != 'N');
@@ -331,20 +332,21 @@ public class RogerMelich_Project {
                     }
 
                 case 4: // Llistar
-
-                    if (introduit == true) {
+                    for (i = 0; i < array.length; i++);
+                    t = array[i];
+                    if (t.isIntroduit() == true) {
                         System.out.println("Dades del Treballador: ");
-                        System.out.println("Noms i Cognoms: " + Nom_Cognoms);
-                        System.out.println("DNI: " + DNI);
-                        System.out.println("Adreça: " + Adreca);
-                        System.out.println("Codi Postal: " + Codi_Postal);
-                        System.out.println("Sou del Treballador:" + Nomina);
+                        System.out.println("Noms i Cognoms: " + t.getNom_Cognoms());
+                        System.out.println("DNI: " + t.getDNI());
+                        System.out.println("Adreça: " + t.getAdreca());
+                        System.out.println("Codi Postal: " + t.getCodi_Postal());
+                        System.out.println("Sou del Treballador:" + t.getNomina());
 
-                        if (practiques) {
+                        if (t.isPractiques()) {
                             System.out.println("Treballador en Pràctiques: Si");
                         }
 
-                        if (!practiques) {
+                        if (!t.isPractiques()) {
                             System.out.println("Treballador en Pràctiques: No");
                         }
                     } else {
