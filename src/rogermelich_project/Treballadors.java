@@ -67,7 +67,8 @@ public class Treballadors {
     }
 
     public void setNomina(double Nomina) {
-        this.Nomina = Nomina;
+        if(Nomina<0) System.out.println("La nomina no pot ser negativa!!");
+        else this.Nomina = Nomina;
     }
 
     public boolean isPractiques() {
