@@ -17,9 +17,6 @@ public class Treballadors {
     private int Codi_Postal = 0;    //Codi Postal del treballador
     private double Nomina = 0.0;    //Sou del Treballador
     private boolean practiques = false; // Ens Indica si el treballador esta en contracte de Pràctiues o no
-
-    //private char tipusTreballador;   //Serveix per determinar si està en pràctiques o no
-
     private boolean introduit = false;  //Per indicar si s'ha introduït
 
     /**
@@ -79,14 +76,6 @@ public class Treballadors {
         this.practiques = practiques;
     }
 
-//    public char getTipusTreballador() {
-//        return tipusTreballador;
-//    }
-//
-//    public void setTipusTreballador(char tipusTreballador) {
-//        this.tipusTreballador = tipusTreballador;
-//    }
-
     public boolean isIntroduit() {
         return introduit;
     }
@@ -108,6 +97,6 @@ public class Treballadors {
                 "Nomina=" + Nomina + 
                 (practiques?"\n Treballador en Practiques" : "\nTreballador en Nomina");
                 //"Treballador en Practiques=" + practiques + '}';
-//                "Tipus Treballador=" + tipusTreballador + '}';
+//                "Tipus Treballador=" + siNO + '}';
     }
 }

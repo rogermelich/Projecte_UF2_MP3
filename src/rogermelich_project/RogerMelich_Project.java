@@ -21,9 +21,6 @@ public class RogerMelich_Project {
     private static int opcions_menu;   //integer que incloem el numeros per terminiar l'opció
     //private static Treballadors t = null; //S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array
     private static char siNO;   //Veure Dades -> Per modificar S/N -> F per sortir
-
-    private static char tipusTreballador;   //Serveix per determinar si està en pràctiques o no //Serveix per determinar si està en pràctiques o no //Serveix per determinar si està en pràctiques o no //Serveix per determinar si està en pràctiques o no
-
     /**
      * @param args the command line arguments
      */
@@ -133,17 +130,17 @@ public class RogerMelich_Project {
 
             do {
                 System.out.println("Introdueix si es un contracte de pràctiques o no (S o N)");
-                tipusTreballador = scan.skip("[\r\n]*").nextLine().charAt(0);
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
 
-                if (tipusTreballador == 's' || tipusTreballador == 'S') {
+                if (siNO == 's' || siNO == 'S') {
                     t.setPractiques(true);
 
                 }
 
-                if (tipusTreballador == 'n' || tipusTreballador == 'N') {
+                if (siNO == 'n' || siNO == 'N') {
                     t.setPractiques(false);
                 }
-            } while (tipusTreballador != 's' && tipusTreballador != 'S' && tipusTreballador != 'n' && tipusTreballador != 'N');
+            } while (siNO != 's' && siNO != 'S' && siNO != 'n' && siNO != 'N');
             t.setIntroduit(true); //Al introduïr tots els camps canviem introduit a true
         } else {
             System.out.println("Ja has introduït aquest treballador o no caben més treballadors");
@@ -294,17 +291,17 @@ public class RogerMelich_Project {
             if (siNO == 's' || siNO == 'S') {
                 do {
                     System.out.println("Introdueix el *Nou* tipus de contracte: (S o N)");
-                    tipusTreballador = scan.skip("[\r\n]*").nextLine().charAt(0);
+                    siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
 
-                    if (tipusTreballador == 's' || tipusTreballador == 'S') {
+                    if (siNO == 's' || siNO == 'S') {
                         t.setPractiques(true);
                     }
 
-                    if (tipusTreballador == 'n' || tipusTreballador == 'N') {
+                    if (siNO == 'n' || siNO == 'N') {
                         t.setPractiques(false);
                     }
 
-                } while (tipusTreballador != 's' && tipusTreballador != 'n' && tipusTreballador != 'S' && tipusTreballador != 'N');
+                } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
             }
 
             System.out.println("\nTreballador modificat correctament\n");
