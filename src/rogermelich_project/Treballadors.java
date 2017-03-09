@@ -96,7 +96,5 @@ public class Treballadors {
                 "Codi Postal=" + Codi_Postal + 
                 "Nomina=" + Nomina + 
                 (practiques?"\n Treballador en Practiques" : "\nTreballador en Nomina");
-                //"Treballador en Practiques=" + practiques + '}';
-//                "Tipus Treballador=" + siNO + '}';
     }
 }

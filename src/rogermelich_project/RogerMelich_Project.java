@@ -19,7 +19,6 @@ public class RogerMelich_Project {
     private static Treballadors[] array = new Treballadors[MAX_TREBALLADORS];
 
     private static int opcions_menu;   //integer que incloem el numeros per terminiar l'opció
-    //private static Treballadors t = null; //S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array
     private static char siNO;   //Veure Dades -> Per modificar S/N -> F per sortir
     /**
      * @param args the command line arguments
@@ -101,17 +100,14 @@ public class RogerMelich_Project {
             //Indiquem que t = array [i]
             t = array[i];
             System.out.println("Introdueix el Nom i Cognoms del Treballador seguit d'un espai entre nom i cognoms");
-            //Nom_Cognoms = scan.skip("[\r\n]*").nextLine();
             t.setNom_Cognoms(scan.skip("[\r\n]*").nextLine());
             System.out.println("Introdueix el DNI");
             t.setDNI(scan.skip("[\r\n]*").nextLine());
 
             System.out.println("Introdueix l'Adreça");
-            //Adreca = scan.skip("[\r\n]*").nextLine();
             t.setAdreca(scan.skip("[\r\n]*").nextLine());
             do {
                 System.out.println("Introdueix el codi Postal");
-                //Codi_Postal = scan.nextInt();
                 t.setCodi_Postal(scan.nextInt());
 
                 if (t.getCodi_Postal() < 0) {
@@ -121,7 +117,6 @@ public class RogerMelich_Project {
 
             do {
                 System.out.println("Introdueix la Nomina del Treballador");
-                //Nomina = scan.nextDouble();
                 t.setNomina(scan.nextDouble());
                 if (t.getNomina() < 0) {
                     System.out.println("Valor Incorrecte");
