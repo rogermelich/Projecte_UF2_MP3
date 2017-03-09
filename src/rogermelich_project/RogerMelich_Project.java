@@ -15,14 +15,12 @@ public class RogerMelich_Project {
 
     //Numero de Caselles Màximes de l'array
     private static final int MAX_TREBALLADORS = 2;
-    //Array on guardem la informació dels pilots
+    //Array on guardem la informació dels treballadors
     private static Treballadors[] array = new Treballadors[MAX_TREBALLADORS];
 
     private static int opcions_menu;   //integer que incloem el numeros per terminiar l'opció
-    private static Treballadors t = null; //S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array
-    private static char esborrar;  //Esborrar Dades
-    private static char modificar; //Modifcar Dades
-    private static char llista;   //Veure Dades
+    //private static Treballadors t = null; //S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array//S'utilitza per apuntar al treballador de les caselles de l'array
+    private static char siNO;   //Veure Dades -> Per modificar S/N -> F per sortir
 
     private static char tipusTreballador;   //Serveix per determinar si està en pràctiques o no //Serveix per determinar si està en pràctiques o no //Serveix per determinar si està en pràctiques o no //Serveix per determinar si està en pràctiques o no
 
@@ -73,11 +71,11 @@ public class RogerMelich_Project {
             case 1: //1. Introduïr treballador
                 introduirtreballador();
                 break;
-            case 2: //2. Modificar treballador
-                modificarTreballador();
-                break;
-            case 3: //3. Borrar treballador
+            case 2: //2. Borrar treballador
                 borrarTreballador();
+                break;
+            case 3: //3. Modificar treballador
+                modificarTreballador();
                 break;
             case 4: //4. Llistar treballador
                 llistarTreballadors();
@@ -96,13 +94,13 @@ public class RogerMelich_Project {
 
     public static void introduirtreballador() {
         Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
-
+        Treballadors t = null;
         int i;
         // Busco una casella buida al vector
         for (i = 0; i < array.length && array[i].isIntroduit(); i++);
         //Aquests for ho fa tot desde la primera línia.
 
-        if (i != array.length) { //indiquem que introduït == false
+        if (i < array.length) { //indiquem que introduït == false
             //Indiquem que t = array [i]
             t = array[i];
             System.out.println("Introdueix el Nom i Cognoms del Treballador seguit d'un espai entre nom i cognoms");
@@ -155,200 +153,26 @@ public class RogerMelich_Project {
 
     public static void modificarTreballador() {
         Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
-
-        int i;
-        for (i = 0; i < array.length; i++);
-        t = array[i];
-        if (!t.isIntroduit()) {
-            System.out.println("No hi ha cap treballador per modificar, si el vols modificar el tens que introduïr promer.\n");
-            System.out.println("");
-        }
-
-        if (t.isIntroduit()) {
-
-            do {
-
-                System.out.println("Vols veure les dades del treballador? (S o N)");
-                llista = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-            } while (llista != 's' && llista != 'n' && llista != 'S' && llista != 'N');
-
-            if (llista == 's' || llista == 'S') {
-                System.out.println("Dades del Treballador: ");
-                System.out.println("Noms i Cognoms: " + t.getNom_Cognoms());
-                System.out.println("DNI: " + t.getDNI());
-                System.out.println("Adreça: " + t.getAdreca());
-                System.out.println("Codi Postal: " + t.getCodi_Postal());
-                System.out.println("Sou del Treballador:" + t.getNomina());
-
-                if (t.isPractiques()) {
-                    System.out.println("Treballador en Pràctiques: Si");
-                }
-
-                if (!t.isPractiques()) {
-                    System.out.println("Treballador en Pràctiques: No");
-                }
-            }
-
-            do {
-
-                System.out.println("Vols veure les dades del treballador? (S o N)");
-                llista = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-            } while (llista != 's' && llista != 'n' && llista != 'S' && llista != 'N');
-
-            if (llista == 's' || llista == 'S') {
-
-                System.out.println("Nom i Cognoms: " + t.getNom_Cognoms());    //Modifiquem Nom i Cognoms
-
-                do {
-                    System.out.println("Vols modificar els Noms i Cognoms? (S o N)");
-                    modificar = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-                } while (modificar != 's' && modificar != 'n' && modificar != 'S' && modificar != 'N');
-
-                if (modificar == 's' || modificar == 'S') {
-                    System.out.println("Introdueix el Nou Treballador:");
-                    t.setNom_Cognoms(scan.skip("[\r\n]*").nextLine());
-                }
-
-                System.out.println("DNI: " + t.getDNI());    //Modifiquem el DNI
-
-                do {
-                    System.out.println("Vols modificar el DNI? (S o N)");
-                    modificar = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-                } while (modificar != 's' && modificar != 'n' && modificar != 'S' && modificar != 'N');
-
-                if (modificar == 's' || modificar == 'S') {
-                    System.out.println("Introdueix el *Nou* DNI del treballador:");
-                    t.setDNI(scan.skip("[\r\n]*").nextLine());
-                }
-
-                System.out.println("Adreça: " + t.getAdreca());    //Modifiquem l'Adreça
-
-                do {
-                    System.out.println("Vols modificar l'Adreça? (S o N)");
-                    modificar = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-                } while (modificar != 's' && modificar != 'n' && modificar != 'S' && modificar != 'N');
-
-                if (modificar == 's' || modificar == 'S') {
-                    System.out.println("Introdueix la *Nova* adreça del treballador:");
-                    t.setAdreca(scan.skip("[\r\n]*").nextLine());
-                }
-
-                System.out.println("Codi Postal: " + t.getCodi_Postal());  //Modifiquem el Codi Postal
-
-                do {
-                    System.out.println("Vols modificar el Codi Postal? (S o N)");
-                    modificar = scan.skip("[\r\n]*").nextLine().charAt(0);
-                } while (modificar != 's' && modificar != 'n' && modificar != 'S' && modificar != 'N');
-
-                if (modificar == 's' || modificar == 'S') {
-                    do {
-                        System.out.println("Introdueix el *Nou* valor del Codi Postal: ");
-                        t.setCodi_Postal(scan.nextInt());
-
-                        if (t.getCodi_Postal() <= 0) {
-                            System.out.println("Valor incorrecte");
-                        }
-
-                    } while (t.getCodi_Postal() <= 0);
-                }
-
-                System.out.println("Sou (Nomina) del treballador: " + t.getNomina()); //Modifiquem el Sou de Treballador
-
-                do {
-                    System.out.println("Vols modificar el Sou del treballador? (S o N)");
-                    modificar = scan.skip("[\r\n]*").nextLine().charAt(0);
-                } while (modificar != 's' && modificar != 'n' && modificar != 'S' && modificar != 'N');
-
-                if (modificar == 's' || modificar == 'S') {
-
-                    do {
-                        System.out.println("Introdueix el *Nou* sou del treballador: ");
-                        t.setNomina(scan.nextDouble());
-
-                        if (t.getNomina() <= 0) {
-                            System.out.println("Valor incorrecte!");
-                        }
-
-                    } while (t.getNomina() <= 0);
-                }
-
-                // El contracte es en Pràctiques o no
-                if (t.isPractiques()) {
-                    System.out.println("Treballador en Pràctiques: Si");
-                }
-
-                if (!t.isPractiques()) {
-                    System.out.println("Treballador en Pràctiques: No");
-                }
-
-                do {
-                    System.out.println("Vols modificar el tipus de Contracte (Contracte de Pràctiques o no)? (S o N)");
-                    modificar = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-                } while (modificar != 's' && modificar != 'n' && modificar != 'S' && modificar != 'N');
-
-                if (modificar == 's' || modificar == 'S') {
-                    do {
-                        System.out.println("Introdueix el *Nou* tipus de contracte: (S o N)");
-                        tipusTreballador = scan.skip("[\r\n]*").nextLine().charAt(0);
-
-                        if (tipusTreballador == 's' || tipusTreballador == 'S') {
-                            t.setPractiques(true);
-                        }
-
-                        if (tipusTreballador == 'n' || tipusTreballador == 'N') {
-                            t.setPractiques(false);
-                        }
-
-                    } while (tipusTreballador != 's' && tipusTreballador != 'n' && tipusTreballador != 'S' && tipusTreballador != 'N');
-                }
-
-                System.out.println("\nTreballador modificat correctament\n");
-            }
-        }
-    }
-
-    public static void borrarTreballador() {
-        Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
-
-        esborrar = 'N';
-        int i;
-        for (i = 0; i < array.length; i++) {
+        Treballadors t = null;
+        //Primer recorrem l'array buscant caselles omplides i preguntant quina volem modificar
+        int cont = 1, i;
+        for (i = 0; i < array.length && siNO != 'S' && siNO != 'F'; i++) {
             t = array[i];
-
             if (t.isIntroduit()) {
-                System.out.println(t);
+                System.out.format("\nTreballador %d:\n", cont++);
+                System.out.println(t.toString());
                 do {
-                    System.out.println("\nVols Borrar el treballador? (S o N)");
-                    esborrar = scan.skip("[\r\n]*").nextLine().charAt(0);
-                } while (esborrar != 's' && esborrar != 'n' && esborrar != 'S' && esborrar != 'N');
+                    System.out.println("Vols veure les dades del treballador(S o N) o finalitzar la recerca (F)?");
+                    siNO = scan.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
 
-                if (esborrar == 's' || esborrar == 'S') {
-                    t.setIntroduit(false);
-
-                    System.out.println("\nDades del Treballador Borrades\n");
-                    break;
-                }
-
-            } else {
-                System.out.println("No s'ha borrat cap Treballador\n");
-                System.out.println("");
+                } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+            }
+            if (siNO == 'S') {
+                break;
             }
         }
-    }
-
-    public static void llistarTreballadors() {
-        Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
-        
-        int i;
-        for (i = 0; i < array.length; i++);
-        t = array[i];
-        if (t.isIntroduit() == true) {
+        //Si l'usuari a contestat que si
+        if (siNO == 's' || siNO == 'S') {
             System.out.println("Dades del Treballador: ");
             System.out.println("Noms i Cognoms: " + t.getNom_Cognoms());
             System.out.println("DNI: " + t.getDNI());
@@ -363,12 +187,225 @@ public class RogerMelich_Project {
             if (!t.isPractiques()) {
                 System.out.println("Treballador en Pràctiques: No");
             }
+        }
+
+        do {
+
+            System.out.println("Vols modificar les dades del treballador? (S o N)");
+            siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+
+        } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+        if (siNO == 's' || siNO == 'S') {
+
+            System.out.println("Nom i Cognoms: " + t.getNom_Cognoms());    //Modifiquem Nom i Cognoms
+
+            do {
+                System.out.println("Vols modificar els Noms i Cognoms? (S o N)");
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+
+            } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+            if (siNO == 's' || siNO == 'S') {
+                System.out.println("Introdueix el Nou Treballador:");
+                t.setNom_Cognoms(scan.skip("[\r\n]*").nextLine());
+            }
+
+            System.out.println("DNI: " + t.getDNI());    //Modifiquem el DNI
+
+            do {
+                System.out.println("Vols modificar el DNI? (S o N)");
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+
+            } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+            if (siNO == 's' || siNO == 'S') {
+                System.out.println("Introdueix el *Nou* DNI del treballador:");
+                t.setDNI(scan.skip("[\r\n]*").nextLine());
+            }
+
+            System.out.println("Adreça: " + t.getAdreca());    //Modifiquem l'Adreça
+
+            do {
+                System.out.println("Vols modificar l'Adreça? (S o N)");
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+
+            } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+            if (siNO == 's' || siNO == 'S') {
+                System.out.println("Introdueix la *Nova* adreça del treballador:");
+                t.setAdreca(scan.skip("[\r\n]*").nextLine());
+            }
+
+            System.out.println("Codi Postal: " + t.getCodi_Postal());  //Modifiquem el Codi Postal
+
+            do {
+                System.out.println("Vols modificar el Codi Postal? (S o N)");
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+            } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+            if (siNO == 's' || siNO == 'S') {
+                do {
+                    System.out.println("Introdueix el *Nou* valor del Codi Postal: ");
+                    t.setCodi_Postal(scan.nextInt());
+
+                    if (t.getCodi_Postal() <= 0) {
+                        System.out.println("Valor incorrecte");
+                    }
+
+                } while (t.getCodi_Postal() <= 0);
+            }
+
+            System.out.println("Sou (Nomina) del treballador: " + t.getNomina()); //Modifiquem el Sou de Treballador
+
+            do {
+                System.out.println("Vols modificar el Sou del treballador? (S o N)");
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+            } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+            if (siNO == 's' || siNO == 'S') {
+
+                do {
+                    System.out.println("Introdueix el *Nou* sou del treballador: ");
+                    t.setNomina(scan.nextDouble());
+
+                    if (t.getNomina() <= 0) {
+                        System.out.println("Valor incorrecte!");
+                    }
+
+                } while (t.getNomina() <= 0);
+            }
+
+            // El contracte es en Pràctiques o no
+            if (t.isPractiques()) {
+                System.out.println("Treballador en Pràctiques: Si");
+            }
+
+            if (!t.isPractiques()) {
+                System.out.println("Treballador en Pràctiques: No");
+            }
+
+            do {
+                System.out.println("Vols modificar el tipus de Contracte (Contracte de Pràctiques o no)? (S o N)");
+                siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+
+            } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+
+            if (siNO == 's' || siNO == 'S') {
+                do {
+                    System.out.println("Introdueix el *Nou* tipus de contracte: (S o N)");
+                    tipusTreballador = scan.skip("[\r\n]*").nextLine().charAt(0);
+
+                    if (tipusTreballador == 's' || tipusTreballador == 'S') {
+                        t.setPractiques(true);
+                    }
+
+                    if (tipusTreballador == 'n' || tipusTreballador == 'N') {
+                        t.setPractiques(false);
+                    }
+
+                } while (tipusTreballador != 's' && tipusTreballador != 'n' && tipusTreballador != 'S' && tipusTreballador != 'N');
+            }
+
+            System.out.println("\nTreballador modificat correctament\n");
         } else {
-            System.out.println("\nNo hi ha cap treballador\n");
+            System.out.println("No hi ha cap treballador per modificar, si el vols modificar el tens que introduïr promer.\n");
+            System.out.println("");
+        }
+    }
+
+    public static void borrarTreballador() {
+        Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
+        Treballadors t = null;
+        siNO = 'N';
+        int i;
+        for (i = 0; i < array.length && siNO != 'F'; i++) {
+            t = array[i];
+            if (t.isIntroduit()) {
+                System.out.println(t);
+                do {
+                    System.out.println("\nVols Borrar el treballador? (S o N)");
+                    siNO = scan.skip("[\r\n]*").nextLine().charAt(0);
+                } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+            }
+            if (siNO == 'S') {
+                break;
+            }
+        }
+
+        if (siNO == 's' || siNO == 'S') {
+            t.setIntroduit(false);
+            System.out.println("\nDades del Treballador Borrades\n");
+        } else {
+            System.out.println("No s'ha borrat cap Treballador\n");
+            System.out.println("");
+        }
+    }
+
+    public static void llistarTreballadors() {
+        Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
+        Treballadors t = null;
+        boolean algun = false;
+        siNO = 'S';
+        int i;
+        for (i = 0; i < array.length; i++) {
+            t = array[i];
+            if (t.isIntroduit() == true) {
+                algun = true;
+                System.out.println("Dades del Treballador: ");
+                System.out.println("Noms i Cognoms: " + t.getNom_Cognoms());
+                System.out.println("DNI: " + t.getDNI());
+                System.out.println("Adreça: " + t.getAdreca());
+                System.out.println("Codi Postal: " + t.getCodi_Postal());
+                System.out.println("Sou del Treballador:" + t.getNomina());
+
+                if (t.isPractiques()) {
+                    System.out.println("Treballador en Pràctiques: Si");
+                }
+
+                if (!t.isPractiques()) {
+                    System.out.println("Treballador en Pràctiques: No");
+                }
+                do {
+                    System.out.println("\n Vols veure més treballadors(S/N)?:");
+                    siNO = scan.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
+                } while (siNO != 'S' && siNO != 'N');
+            }
+            if (siNO == 'N') {
+                break;
+            }
+        }
+        if (!algun) {
+            System.out.println("\nNo hi ha treballadors per mostrar, si vols, primer crea'n.");
         }
     }
 
     public static void recuperarTreballador() {
         Scanner scan = new Scanner(System.in);   //Servei per llegir el que fiquem al teclat
+        Treballadors t = null;
+        char siNo = 'N';
+        int cont = 0, i;
+        for (i = 0; i < array.length && siNo != 'S' && siNo != 'F'; i++) {
+            t = array[i];
+            if (!t.isIntroduit()) {
+                System.out.format("\nTreballador %d:\n", ++cont);
+                System.out.println(t.toString());
+                do {
+                    System.out.println("\nVols recuperar el treballador(S/N) o finalitzar la cerca (F)?:");
+                    siNo = scan.skip("[\r\n]*").nextLine().toUpperCase().charAt(0);
+                } while (siNO != 's' && siNO != 'n' && siNO != 'S' && siNO != 'N');
+            }
+            if (siNo == 'S') {
+                break;
+            }
+        }
+        
+        if (siNo == 'S') {
+            t.setIntroduit(true);
+            System.out.println("Treballador recuperat correctament.");
+        } else {
+            if(cont==0) System.out.println("No hi ha treballadors per recuperat.");
+            else System.out.println("Treballador no recuperat.");
+        }
     }
 }
